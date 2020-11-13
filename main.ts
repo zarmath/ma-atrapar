@@ -1,9 +1,10 @@
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
-    game.over(true)
+    game.over(false)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     Patito.destroy(effects.fire, 100)
     info.changeScoreBy(1)
+    music.powerUp.play()
 })
 let Patito: Sprite = null
 scene.setBackgroundImage(img`
@@ -178,6 +179,7 @@ let Enemigo = sprites.create(img`
 Enemigo.follow(Mi_Personaje, 20)
 Enemigo.setPosition(0, 0)
 info.setScore(0)
+info.startCountdown(30)
 game.onUpdateInterval(2000, function () {
     Patito = sprites.create(img`
         . . . . . . . . . . b 5 b . . . 
@@ -199,6 +201,11 @@ game.onUpdateInterval(2000, function () {
         `, SpriteKind.Food)
     Patito.setPosition(randint(0, 160), randint(0, 120))
     timer.after(1500, function () {
-        Patito.destroy(effects.confetti, 200)
+        Patito.destroy(effects.halo, 100)
     })
+})
+forever(function () {
+    if (info.score() == 10) {
+        game.over(true)
+    }
 })
