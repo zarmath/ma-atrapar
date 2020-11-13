@@ -1,8 +1,8 @@
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    mySprite2.destroy(effects.fire, 500)
+    Patito.destroy(effects.fire, 100)
     info.changeScoreBy(1)
 })
-let mySprite2: Sprite = null
+let Patito: Sprite = null
 let mySprite = sprites.create(img`
     . . . . . . f f f f . . . . . . 
     . . . . f f f 2 2 f f f . . . . 
@@ -149,7 +149,7 @@ scene.setBackgroundColor(10)
 info.setScore(0)
 info.startCountdown(30)
 game.onUpdateInterval(2000, function () {
-    mySprite2 = sprites.create(img`
+    Patito = sprites.create(img`
         . . . . . . . . . . b 5 b . . . 
         . . . . . . . . . b 5 b . . . . 
         . . . . . . b b b b b b . . . . 
@@ -167,8 +167,8 @@ game.onUpdateInterval(2000, function () {
         . . . c c c c c c c c b b . . . 
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Enemy)
-    mySprite2.setPosition(randint(0, 160), randint(0, 120))
-    timer.after(3000, function () {
-        mySprite2.destroy(effects.warmRadial, 500)
+    Patito.setPosition(randint(0, 160), randint(0, 120))
+    timer.after(1500, function () {
+        Patito.destroy(effects.confetti, 200)
     })
 })
